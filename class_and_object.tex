@@ -1,0 +1,217 @@
+\section{What is Object-Oriented Programming?}
+
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects." These objects encapsulate data (attributes) and methods to process the data.
+
+
+\subsection{Properies of OOP}
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|p{3cm}|p{9cm}|}
+		\hline
+		\textbf{Property} & \textbf{Description} \\ \hline
+		Abstraction & Helps to hide unnecessary details and show only the essential features of an object to the user. \\ \hline
+		Inheritance & Enables code reuse by allowing a class to inherit attributes and methods from another class. \\ \hline
+		Encapsulation & Protects data from unauthorized access by restricting access to certain components. \\ \hline
+		Polymorphism & Allows objects to be treated differently based on the context, enabling flexible and dynamic behavior. \\ \hline
+	\end{tabular}
+\end{table}
+
+\section{OOP in Python}
+\subsection{Class}
+A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).\\
+\\
+\\
+\\
+\\
+
+\textbf{Coding}
+\begin{lstlisting}[language=python, caption={Define Book class}]
+	class Book:
+		def __init__(self, title, author):
+			self.title = title
+			self.author = author
+			self.rm_time = 0
+			self.is_borrow = false
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+	\item \texttt{class Book:} Defines a class named \texttt{Book}.
+	\item \texttt{\_\_init\_\_ method:} Initializes the \texttt{title}, \texttt{author},\texttt{rm\_time} and \texttt{is\_borrow} attributes when a new object is created.
+\end{itemize}
+
+\subsection{Objects}
+An Object is an instance of a Class. It represents a specific implementation of the class and holds its own data.
+
+\textbf{Creating object}
+\begin{lstlisting}[language=python, caption={creating object}]
+	class Book:
+		def __init__(self, title, author):
+			self.title = title
+			self.author = author
+			self.rm_time = 0
+			self.is_borrow = false
+	
+	book1 = Book("Progamming Python for beggin", "A")
+	book2 = Book("Data structure","B")
+	
+	print(book1.title)
+	print(book2.author)
+\end{lstlisting}
+
+\begin{lstlisting}[language=python,caption={Output object}]
+	Progamming Python for beggin
+	B
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+	\item \texttt{book1 = Book("Programming Python for Beginners", "A"):} Creates an object of the \texttt{Book} class with \texttt{title} as "Programming Python for Beginners" and \texttt{author} as "A".
+	\item \texttt{book2 = Book("Data Structure", "B"):} Creates another object of the \texttt{Book} class with \texttt{title} as "Data Structure" and \texttt{author} as "B".
+	\item \texttt{book1.title:} Accesses the \texttt{title} attribute of the \texttt{book1} object.
+	\item \texttt{book2.author:} Accesses the \texttt{author} attribute of the \texttt{book2} object.
+\end{itemize}
+
+\subsection{Sefl parameter}
+\begin{itemize}
+	\item The self keyword is used to represent the instance of the class.
+	\item Variables prefixed with self are the attributes of the class, while others are merely local variables of the class
+\end{itemize}
+
+\begin{lstlisting}
+	class Book:
+		def __init__(self, title, author):
+			# self-prefixed attributes (instance variables)
+			self.title = title
+			self.author = author
+			self.status = "Available"  # Default value
+			# Local variable
+			temp = "This is temporary"  # Only accessible within this method
+			
+		def borrow(self):
+			if self.status == "Available":
+			self.status = "Borrowed"
+			print(f"The book '{self.title}' has been borrowed.")
+			else:
+			print(f"The book '{self.title}' is already borrowed.")
+		
+			# temp is not accessible here
+			# print(temp)  # This will raise a NameError
+	
+	book1 = Book("Data Structures", "A")
+	# print(book1.temp) # This will raise a AttributeError
+\end{lstlisting}
+
+
+\subsection{\_\_init\_\_ method}
+\_\_init\_\_ method is the constructor in Python, automatically called when a new object is created. It initializes the attributes of the class.
+\begin{lstlisting}[language=python, caption={\_\_init\_\_ method}]
+	class Birthday:
+		def __init__(self, day, month,year):
+			self.day = day
+			self.month = month
+			self.year = year
+			
+	birthday_peter = Birthday(1,1,2010)
+	print(f"{birthday_peter.day}/{birthday_peter.month}/{birthday_peter.year}")
+\end{lstlisting}
+
+\begin{lstlisting}[language=python,caption={Output \_\_init\_\_ method}]
+	1/1/2010
+\end{lstlisting}
+\textbf{Explanation:}
+\begin{itemize}
+	\item \texttt{\_\_init\_\_} : Special method used for initialization.
+	\item \texttt{self.day}, \texttt{self.month}, \texttt{self.year:}  Instance attributes initialized in the constructor.
+\end{itemize}
+
+\subsection{\_\_call\_\_ Method}
+The \_\_call\_\_ method in Python allows an object of a class to be called like a function. It is automatically executed when the object is followed by parentheses.
+
+\begin{lstlisting}[language=python, caption={\_\_call\_\_ Method}]
+	class Greeting:
+	def __init__(self, name):
+	self.name = name
+	
+	def __call__(self, message):
+	return f"{message}, {self.name}!"
+	
+	greet = Greeting("Alice")
+	print(greet("Hello"))
+\end{lstlisting}
+
+\begin{lstlisting}[language=python, caption={Output \_\_call\_\_ method}]
+	Hello, Alice!
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+	\item \texttt{\_\_call\_\_}: A special method in Python that makes an instance of a class callable like a function.
+	\item \texttt{self.name}: An instance attribute initialized in the constructor, storing the name.
+	\item \texttt{greet}: An instance of the \texttt{Greeting} class, initialized with the name "Alice".
+	\item \texttt{greet("Hello")}: Invokes the \_\_call\_\_ method of the \texttt{greet} object, returning "Hello, Alice!".
+\end{itemize}
+
+\section{Python Inheritance}
+Inheritance is a fundamental concept in object-oriented programming (OOP). It allows one class (child class) to inherit the attributes and methods of another class (parent class). This promotes code reuse and enables the creation of a hierarchical relationship between classes.
+
+\subsection{How Inheritance Works}
+When a class inherits from another:
+\begin{itemize}
+	\item The child class gains access to all public and protected attributes and methods of the parent class.
+	\item The child class can also override methods of the parent class to provide specific behavior.
+	\item The \texttt{super()} function is used to access methods and attributes of the parent class from the child class.
+\end{itemize}
+
+\subsection{Example: Basic Inheritance}
+\begin{lstlisting}[language=python, caption={Inheritance Example}]
+	# Parent class
+	class Animal:
+		def __init__(self, name):
+			self.name = name
+	
+		def speak(self):
+			return f"{self.name} makes a sound."
+	
+	# Child class
+	class Dog(Animal):
+		def __init__(self, name, breed):
+			super().__init__(name)  # Initialize the parent class
+			self.breed = breed
+	
+		def speak(self):
+			return f"{self.name}, the {self.breed}, barks."
+	
+	# Child class
+	class Cat(Animal):
+		def __init__(self, name, color):
+			super().__init__(name)  # Initialize the parent class
+			self.color = color
+		
+		def speak(self):
+			return f"{self.name}, the {self.color} cat, meows."
+	
+	# Create instances
+	dog = Dog("Buddy", "Golden Retriever")
+	cat = Cat("Whiskers", "white")
+	
+	print(dog.speak())  # Output: Buddy, the Golden Retriever, barks.
+	print(cat.speak())  # Output: Whiskers, the white cat, meows.
+\end{lstlisting}
+
+\subsection{Explanation}
+\begin{itemize}
+	\item \texttt{class Animal:} This is the parent class. It contains common attributes (\texttt{name}) and methods (\texttt{speak}) that all child classes can inherit.
+	\item \texttt{super().\_\_init\_\_(name):} The \texttt{super()} function is used in the child class to call the parent class's constructor and initialize inherited attributes.
+	\item \texttt{class Dog(Animal):} This is a child class inheriting from \texttt{Animal}. It adds a new attribute (\texttt{breed}) and overrides the \texttt{speak()} method.
+	\item \texttt{class Cat(Animal):} Similar to \texttt{Dog}, this child class inherits from \texttt{Animal}, adds a new attribute (\texttt{color}), and overrides the \texttt{speak()} method.
+	\item \texttt{dog.speak():} Calls the overridden \texttt{speak()} method in the \texttt{Dog} class, which includes specific behavior for dogs.
+	\item \texttt{cat.speak():} Calls the overridden \texttt{speak()} method in the \texttt{Cat} class, which includes specific behavior for cats.
+\end{itemize}
+
+
+
+
+
+
+
