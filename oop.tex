@@ -1,0 +1,39 @@
+
+	\section{Delegation}
+		\subsection{What is Delegation?}
+		\subsection{Why Use Delegation?}
+	\section{Inheritance}
+		\subsection{What is Inheritance}
+		\subsection{Common Pitfalls when using Inheritance}
+	\section{When to Use Inheritance vs Delegation}
+	
+		\begin{table}[H]
+			\centering
+			\caption{When to Use Inheritance vs Delegation}
+			\label{tab:inheritance-delegation}
+			\begin{tabularx}{\textwidth}{>{\bfseries}l X X}
+				\toprule
+				Scenario & Prefer Inheritance & Prefer Delegation (Composition) \\
+				\midrule
+				Relationship &
+				Clear “is-a” (\texttt{Dog} is-a \texttt{Animal}) &
+				“has-a” or “uses-a” (\texttt{Car} has-a \texttt{Engine}) \\
+				Behavior Extension &
+				You need to override or extend base behavior directly &
+				You want to assemble behavior from multiple, independent components \\
+				Runtime Flexibility &
+				Static relationships known at design time &
+				Ability to swap in different implementations at runtime \\
+				Coupling Concerns &
+				Acceptable tight coupling to parent &
+				You need loose coupling and easier testing via mocks \\
+				Hierarchy Complexity &
+				Simple, shallow hierarchies &
+				Avoids deep, fragile inheritance trees \\
+				Single Responsibility &
+				Parent and child share cohesive domain &
+				Each class focuses on its own concern \\
+				\bottomrule
+			\end{tabularx}
+		\end{table}
+	\section{Example Custom PyTorch Classes}
