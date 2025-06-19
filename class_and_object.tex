@@ -19,25 +19,17 @@ Object-Oriented Programming (OOP) is a programming paradigm based on the concept
 \section{OOP in Python}
 \subsection{Class}
 A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).\\
-\\
-\\
-\\
-\\
-
 \textbf{Coding}
 \begin{lstlisting}[language=python, caption={Define Book class}]
 	class Book:
-		def __init__(self, title, author):
-			self.title = title
-			self.author = author
-			self.rm_time = 0
-			self.is_borrow = false
+		title = "Math"
+		author = "Newtons"
 \end{lstlisting}
 
 \textbf{Explanation:}
 \begin{itemize}
 	\item \texttt{class Book:} Defines a class named \texttt{Book}.
-	\item \texttt{\_\_init\_\_ method:} Initializes the \texttt{title}, \texttt{author},\texttt{rm\_time} and \texttt{is\_borrow} attributes when a new object is created.
+	\item \texttt{title} and \texttt{author} is attributes. 
 \end{itemize}
 
 \subsection{Objects}
@@ -46,39 +38,88 @@ An Object is an instance of a Class. It represents a specific implementation of 
 \textbf{Creating object}
 \begin{lstlisting}[language=python, caption={creating object}]
 	class Book:
-		def __init__(self, title, author):
-			self.title = title
-			self.author = author
-			self.rm_time = 0
-			self.is_borrow = false
+		title = "unknown"
+		author = "unknown"
 	
-	book1 = Book("Progamming Python for beggin", "A")
-	book2 = Book("Data structure","B")
-	
-	print(book1.title)
-	print(book2.author)
+	new_book = Book()
+	new_book2 = Book()
+	print(f"Title: {new_book.title}, author: {new_book.author})
+	print(f"Title: {new_book2.title}, author {new_book2.author})
 \end{lstlisting}
 
 \begin{lstlisting}[language=python,caption={Output object}]
-	Progamming Python for beggin
-	B
+	Title: unknown, author: unknown
+	Title: unknown, author: unknown
 \end{lstlisting}
 
 \textbf{Explanation:}
 \begin{itemize}
-	\item \texttt{book1 = Book("Programming Python for Beginners", "A"):} Creates an object of the \texttt{Book} class with \texttt{title} as "Programming Python for Beginners" and \texttt{author} as "A".
-	\item \texttt{book2 = Book("Data Structure", "B"):} Creates another object of the \texttt{Book} class with \texttt{title} as "Data Structure" and \texttt{author} as "B".
-	\item \texttt{book1.title:} Accesses the \texttt{title} attribute of the \texttt{book1} object.
-	\item \texttt{book2.author:} Accesses the \texttt{author} attribute of the \texttt{book2} object.
+	\item \texttt{new\_book}, \texttt{new\_book2}: an object of class book
+	\item The title and author are unknown, so we need a method to modify them as desired -> Learn about the \_\_init\_\_ method.
 \end{itemize}
 
-\subsection{Sefl parameter}
+\subsection{\_\_init\_\_ method}
+\textbf{The first way we think of.}
+\begin{lstlisting}[language=python]
+	class Book:
+		title = "unknown"
+		author = "unknown"
+	
+		def set_details(self, title, author):
+			self.title = title
+			self.author = author
+	
+	# Example usage:
+	book = Book()
+	book.set_details("1984", "George Orwell")
+	print(f"Title: {book.title}, Author: {book.author}"
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=python]
+	Title: 1984, Author: George Orwell
+\end{lstlisting}
+
+\begin{tcolorbox}[title=Key Information about \_\_init\_\_ Method, coltitle =black,fonttitle=\large\bfseries,colback=green!5!white,colframe=green!75!black]
+	\begin{enumerate}
+		\item \textbf{In Python, there is a special method called \_\_init\_\_, which is a constructor used to initialize the attributes of an object.} Instead of using a separate method like \texttt{set\_details} to set the \texttt{title} and \texttt{author}, you can directly pass these values when creating an object.
+		\item \textbf{\_\_init\_\_ method is the constructor in Python, automatically called when a new object is created.} It initializes the attributes of the class.
+	\end{enumerate}
+\end{tcolorbox}
+
+\textbf{Here’s how you can use the \_\_init\_\_ method to achieve this:}
+.
+\begin{lstlisting}[language=python]
+	class Book:
+		def __init__(self, title, author):
+			self.title = title
+			self.author = author
+	
+	# Example usage:
+	book = Book("1984", "George Orwell")
+	print(f"Title: {book.title}, Author: {book.author}")
+\end{lstlisting}
+
+\begin{lstlisting}[language=python]
+	Title: 1984, Author: George Orwell
+\end{lstlisting}
+\textbf{Explanation:}
 \begin{itemize}
-	\item The self keyword is used to represent the instance of the class.
-	\item Variables prefixed with self are the attributes of the class, while others are merely local variables of the class
+	\item \texttt{\_\_init\_\_}: is the initializer method automatically called when an object is created.
+	\item \texttt{self:} represents the object itself, used to assign and access its attributes. 
 \end{itemize}
 
-\begin{lstlisting}
+$\Rightarrow$ \textbf{\texttt{self} appears in every method of a class, but why is it necessary? Let’s explore the role of self in detail!}
+
+\subsection{Self parameter}
+\begin{tcolorbox}[ coltitle =black,fonttitle=\large\bfseries,colback=green!5!white,colframe=green!75!black]
+	\begin{itemize}
+		\item The \texttt{self} keyword is used to represent the instance of the class.
+		\item Variables prefixed with \texttt{self} are the attributes of the class, while others are merely local variables of the class.
+	\end{itemize}
+\end{tcolorbox}
+
+\begin{lstlisting}[language=python]
 	class Book:
 		def __init__(self, title, author):
 			# self-prefixed attributes (instance variables)
@@ -90,10 +131,10 @@ An Object is an instance of a Class. It represents a specific implementation of 
 			
 		def borrow(self):
 			if self.status == "Available":
-			self.status = "Borrowed"
-			print(f"The book '{self.title}' has been borrowed.")
+				self.status = "Borrowed"
+				print(f"The book '{self.title}' has been borrowed.")
 			else:
-			print(f"The book '{self.title}' is already borrowed.")
+				print(f"The book '{self.title}' is already borrowed.")
 		
 			# temp is not accessible here
 			# print(temp)  # This will raise a NameError
@@ -101,29 +142,12 @@ An Object is an instance of a Class. It represents a specific implementation of 
 	book1 = Book("Data Structures", "A")
 	# print(book1.temp) # This will raise a AttributeError
 \end{lstlisting}
+\begin{tcolorbox}[title=Note on \texttt{self}, colback=yellow!5, colframe=yellow!50!black]
+	In Python, most instance methods include \texttt{self} as their first parameter.  
+	\textbf{Why?}  
+	The \texttt{self} parameter refers to the instance of the class, allowing access to its attributes and other methods. It must be explicitly declared in the method definition but is implicitly passed when calling the method through an object.
+\end{tcolorbox}
 
-
-\subsection{\_\_init\_\_ method}
-\_\_init\_\_ method is the constructor in Python, automatically called when a new object is created. It initializes the attributes of the class.
-\begin{lstlisting}[language=python, caption={\_\_init\_\_ method}]
-	class Birthday:
-		def __init__(self, day, month,year):
-			self.day = day
-			self.month = month
-			self.year = year
-			
-	birthday_peter = Birthday(1,1,2010)
-	print(f"{birthday_peter.day}/{birthday_peter.month}/{birthday_peter.year}")
-\end{lstlisting}
-
-\begin{lstlisting}[language=python,caption={Output \_\_init\_\_ method}]
-	1/1/2010
-\end{lstlisting}
-\textbf{Explanation:}
-\begin{itemize}
-	\item \texttt{\_\_init\_\_} : Special method used for initialization.
-	\item \texttt{self.day}, \texttt{self.month}, \texttt{self.year:}  Instance attributes initialized in the constructor.
-\end{itemize}
 
 \subsection{\_\_call\_\_ Method}
 The \_\_call\_\_ method in Python allows an object of a class to be called like a function. It is automatically executed when the object is followed by parentheses.
@@ -156,12 +180,15 @@ The \_\_call\_\_ method in Python allows an object of a class to be called like 
 Inheritance is a fundamental concept in object-oriented programming (OOP). It allows one class (child class) to inherit the attributes and methods of another class (parent class). This promotes code reuse and enables the creation of a hierarchical relationship between classes.
 
 \subsection{How Inheritance Works}
-When a class inherits from another:
-\begin{itemize}
-	\item The child class gains access to all public and protected attributes and methods of the parent class.
-	\item The child class can also override methods of the parent class to provide specific behavior.
-	\item The \texttt{super()} function is used to access methods and attributes of the parent class from the child class.
-\end{itemize}
+\begin{tcolorbox}[title = {When a class inherits from another:} ,coltitle =black,fonttitle=\large\bfseries,colback=green!5!white,colframe=green!75!black]
+	\begin{itemize}
+		\item The child class gains access to all public and protected attributes and methods of the parent class.
+		\item The child class can also override methods of the parent class to provide specific behavior.
+		\item The \texttt{super()} function is used to access methods and attributes of the parent class from the child class.
+	\end{itemize}
+\end{tcolorbox}
+
+
 
 \subsection{Example: Basic Inheritance}
 \begin{lstlisting}[language=python, caption={Inheritance Example}]
